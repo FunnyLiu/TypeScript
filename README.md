@@ -481,7 +481,11 @@ ignored: directory (17)
 
 ```
 
+## 逐个文件分析
 
+### src/lib/es5.d.ts
+
+标准javascript库的api的声明文件，阅读此文件可以熟悉js的api和ts的api。
 
 # TypeScript
 

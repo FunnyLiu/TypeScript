@@ -1,7 +1,7 @@
 /////////////////////////////
 /// ECMAScript APIs
 /////////////////////////////
-
+//挂载在window对象上的一些属性和方法
 declare var NaN: number;
 declare var Infinity: number;
 
