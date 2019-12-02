@@ -1036,6 +1036,7 @@ interface RegExpMatchArray extends Array<string> {
 }
 
 interface RegExpExecArray extends Array<string> {
+    // 继承并增加index和input属性
     index: number;
     input: string;
 }
@@ -1090,9 +1091,9 @@ interface RegExpConstructor {
     $9: string;
     lastMatch: string;
 }
-
+//正则对象
 declare var RegExp: RegExpConstructor;
-
+//一个比较简单的构造函数
 interface Error {
     name: string;
     message: string;
@@ -1104,9 +1105,9 @@ interface ErrorConstructor {
     (message?: string): Error;
     readonly prototype: Error;
 }
-
+// 对外暴露全局变量
 declare var Error: ErrorConstructor;
-
+// 各种其他类型的异常
 interface EvalError extends Error {}
 
 interface EvalErrorConstructor {
@@ -1210,7 +1211,7 @@ declare var JSON: JSON;
 /////////////////////////////
 /// ECMAScript Array API (specially handled by compiler)
 /////////////////////////////
-
+// 只读的数组
 interface ReadonlyArray<T> {
     /**
      * Gets the length of the array. This is a number one higher than the highest element defined in an array.
@@ -1528,6 +1529,7 @@ interface Array<T> {
      * @param callbackfn  A function that accepts up to three arguments. forEach calls the callbackfn function one time for each element in the array.
      * @param thisArg  An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
      */
+    // 对原有数组进行修改，而不会去返回值
     forEach(
         callbackfn: (value: T, index: number, array: T[]) => void,
         thisArg?: any
@@ -1547,7 +1549,7 @@ interface Array<T> {
      * @param callbackfn A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.
      * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
      */
-    // filter返回的内容类型需要继承自传入值
+    // 这里使用了类型谓语，断言其返回item和传入item类型不一致的情况
     filter<S extends T>(
         callbackfn: (value: T, index: number, array: T[]) => value is S,
         thisArg?: any
@@ -1557,6 +1559,7 @@ interface Array<T> {
      * @param callbackfn A function that accepts up to three arguments. The filter method calls the callbackfn function one time for each element in the array.
      * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
      */
+    // 普通的filter，过滤之后的结果item类型和传入的参数一致
     filter(
         callbackfn: (value: T, index: number, array: T[]) => unknown,
         thisArg?: any
@@ -1636,7 +1639,7 @@ interface Array<T> {
 
     [n: number]: T;
 }
-
+// 数组构造函数
 interface ArrayConstructor {
     new (arrayLength?: number): any[];
     new <T>(arrayLength: number): T[];
@@ -1647,9 +1650,9 @@ interface ArrayConstructor {
     isArray(arg: any): arg is any[];
     readonly prototype: any[];
 }
-
+// 数组构造函数
 declare var Array: ArrayConstructor;
-
+// 属性描述符
 interface TypedPropertyDescriptor<T> {
     enumerable?: boolean;
     configurable?: boolean;
@@ -1658,25 +1661,34 @@ interface TypedPropertyDescriptor<T> {
     get?: () => T;
     set?: (value: T) => void;
 }
-
+// 各类装饰器类型
+// 泛型中使用泛型，但是限制为继承于Function
+// 对象装饰器
 declare type ClassDecorator = <TFunction extends Function>(
+    // 仅增加target属性指向自己
     target: TFunction
 ) => TFunction | void;
+// 属性装饰器
 declare type PropertyDecorator = (
+    //属性和target
     target: Object,
     propertyKey: string | symbol
 ) => void;
+//方法装饰器
 declare type MethodDecorator = <T>(
+    // 增加了对象描述符
     target: Object,
     propertyKey: string | symbol,
     descriptor: TypedPropertyDescriptor<T>
 ) => TypedPropertyDescriptor<T> | void;
+// 参数装饰器
 declare type ParameterDecorator = (
+    // 增加了索引
     target: Object,
     propertyKey: string | symbol,
     parameterIndex: number
 ) => void;
-
+// 类promise
 declare type PromiseConstructorLike = new <T>(
     executor: (
         resolve: (value?: T | PromiseLike<T>) => void,
@@ -1706,6 +1718,7 @@ interface PromiseLike<T> {
 /**
  * Represents the completion of an asynchronous operation
  */
+// Promise类型对象
 interface Promise<T> {
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1741,10 +1754,11 @@ interface ArrayLike<T> {
     readonly length: number;
     readonly [n: number]: T;
 }
-
+// 工具utils
 /**
  * Make all properties in T optional
  */
+// 通过keyof拿到keys，通过in来限制范围
 type Partial<T> = {
     [P in keyof T]?: T[P];
 };
@@ -1752,6 +1766,7 @@ type Partial<T> = {
 /**
  * Make all properties in T required
  */
+// -?意味着？的反义词，就是必须存在
 type Required<T> = {
     [P in keyof T]-?: T[P];
 };
@@ -1759,6 +1774,7 @@ type Required<T> = {
 /**
  * Make all properties in T readonly
  */
+// 全局readonly
 type Readonly<T> = {
     readonly [P in keyof T]: T[P];
 };
@@ -1766,6 +1782,7 @@ type Readonly<T> = {
 /**
  * From T, pick a set of properties whose keys are in the union K
  */
+// pick某个
 type Pick<T, K extends keyof T> = {
     [P in K]: T[P];
 };
@@ -1773,6 +1790,8 @@ type Pick<T, K extends keyof T> = {
 /**
  * Construct a type with a set of properties K of type T
  */
+//value为T类型，key为K类型
+// keyof any 意味着string | number | symbol这些可以为对象key的类型
 type Record<K extends keyof any, T> = {
     [P in K]: T;
 };
@@ -1780,26 +1799,35 @@ type Record<K extends keyof any, T> = {
 /**
  * Exclude from T those types that are assignable to U
  */
+// 如果T中类型在U也有，则never不返回，取T剩下的
 type Exclude<T, U> = T extends U ? never : T;
 
 /**
  * Extract from T those types that are assignable to U
  */
+//  如果U中有T，则返回T
 type Extract<T, U> = T extends U ? T : never;
 
 /**
  * Construct a type with the properties of T except for those in type K.
  */
+// 从T中删除所有K
+// Pick和Exclude配合实现
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 
 /**
  * Exclude null and undefined from T
  */
+// 如果是null或undefined，就never不返回
 type NonNullable<T> = T extends null | undefined ? never : T;
 
 /**
  * Obtain the parameters of a function type in a tuple
  */
+// 获取函数的参数的类型
+// T extends (...args: any) => any意味着函数
+// infer P 推导参数类型为P
+// 如果有P则返回P，否则返回never
 type Parameters<T extends (...args: any) => any> = T extends (
     ...args: infer P
 ) => any
@@ -1809,6 +1837,7 @@ type Parameters<T extends (...args: any) => any> = T extends (
 /**
  * Obtain the parameters of a constructor function type in a tuple
  */
+// 获取构造函数参数的类型，同样通过infer
 type ConstructorParameters<
     T extends new (...args: any) => any
 > = T extends new (...args: infer P) => any ? P : never;
@@ -1816,6 +1845,7 @@ type ConstructorParameters<
 /**
  * Obtain the return type of a function type
  */
+// 获取函数返回值的类型，同样通过infer
 type ReturnType<T extends (...args: any) => any> = T extends (
     ...args: any
 ) => infer R
@@ -1825,6 +1855,7 @@ type ReturnType<T extends (...args: any) => any> = T extends (
 /**
  * Obtain the return type of a constructor function type
  */
+// 获取实例的类型
 type InstanceType<T extends new (...args: any) => any> = T extends new (
     ...args: any
 ) => infer R
