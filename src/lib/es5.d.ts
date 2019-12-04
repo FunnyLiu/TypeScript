@@ -1896,10 +1896,12 @@ type ArrayBufferLike = ArrayBufferTypes[keyof ArrayBufferTypes];
 interface ArrayBufferConstructor {
     readonly prototype: ArrayBuffer;
     new (byteLength: number): ArrayBuffer;
+    //  判断是否是一个ArrayBufferView类型
     isView(arg: any): arg is ArrayBufferView;
 }
+// 定义ArrayBuffer变量
 declare var ArrayBuffer: ArrayBufferConstructor;
-
+// 用作isView判断
 interface ArrayBufferView {
     /**
      * The ArrayBuffer instance referenced by the array.
@@ -2052,6 +2054,7 @@ interface DataViewConstructor {
         byteLength?: number
     ): DataView;
 }
+// DataView对象
 declare var DataView: DataViewConstructor;
 
 /**
@@ -5323,7 +5326,7 @@ declare var Float64Array: Float64ArrayConstructor;
 /////////////////////////////
 /// ECMAScript Internationalization API
 /////////////////////////////
-
+// 国际化相关的API
 declare namespace Intl {
     interface CollatorOptions {
         usage?: string;
@@ -5455,7 +5458,7 @@ declare namespace Intl {
         ): string[];
     };
 }
-
+// 在增加了国际化相关API后，给对应的基础类型接口增加相关API
 interface String {
     /**
      * Determines whether two strings are equivalent in the current or specified locale.
