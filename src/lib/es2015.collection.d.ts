@@ -1,7 +1,10 @@
 interface Map<K, V> {
     clear(): void;
     delete(key: K): boolean;
-    forEach(callbackfn: (value: V, key: K, map: Map<K, V>) => void, thisArg?: any): void;
+    forEach(
+        callbackfn: (value: V, key: K, map: Map<K, V>) => void,
+        thisArg?: any
+    ): void;
     get(key: K): V | undefined;
     has(key: K): boolean;
     set(key: K, value: V): this;
@@ -9,14 +12,18 @@ interface Map<K, V> {
 }
 
 interface MapConstructor {
-    new(): Map<any, any>;
-    new<K, V>(entries?: readonly (readonly [K, V])[] | null): Map<K, V>;
+    new (): Map<any, any>;
+    new <K, V>(entries?: readonly (readonly [K, V])[] | null): Map<K, V>;
     readonly prototype: Map<any, any>;
 }
+// Map
 declare var Map: MapConstructor;
 
 interface ReadonlyMap<K, V> {
-    forEach(callbackfn: (value: V, key: K, map: ReadonlyMap<K, V>) => void, thisArg?: any): void;
+    forEach(
+        callbackfn: (value: V, key: K, map: ReadonlyMap<K, V>) => void,
+        thisArg?: any
+    ): void;
     get(key: K): V | undefined;
     has(key: K): boolean;
     readonly size: number;
@@ -30,16 +37,22 @@ interface WeakMap<K extends object, V> {
 }
 
 interface WeakMapConstructor {
-    new <K extends object = object, V = any>(entries?: readonly [K, V][] | null): WeakMap<K, V>;
+    new <K extends object = object, V = any>(
+        entries?: readonly [K, V][] | null
+    ): WeakMap<K, V>;
     readonly prototype: WeakMap<object, any>;
 }
+// WeakMap
 declare var WeakMap: WeakMapConstructor;
 
 interface Set<T> {
     add(value: T): this;
     clear(): void;
     delete(value: T): boolean;
-    forEach(callbackfn: (value: T, value2: T, set: Set<T>) => void, thisArg?: any): void;
+    forEach(
+        callbackfn: (value: T, value2: T, set: Set<T>) => void,
+        thisArg?: any
+    ): void;
     has(value: T): boolean;
     readonly size: number;
 }
@@ -48,10 +61,14 @@ interface SetConstructor {
     new <T = any>(values?: readonly T[] | null): Set<T>;
     readonly prototype: Set<any>;
 }
+// Set
 declare var Set: SetConstructor;
 
 interface ReadonlySet<T> {
-    forEach(callbackfn: (value: T, value2: T, set: ReadonlySet<T>) => void, thisArg?: any): void;
+    forEach(
+        callbackfn: (value: T, value2: T, set: ReadonlySet<T>) => void,
+        thisArg?: any
+    ): void;
     has(value: T): boolean;
     readonly size: number;
 }
@@ -66,4 +83,5 @@ interface WeakSetConstructor {
     new <T extends object = object>(values?: readonly T[] | null): WeakSet<T>;
     readonly prototype: WeakSet<object>;
 }
+// WeakSet
 declare var WeakSet: WeakSetConstructor;

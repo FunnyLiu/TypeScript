@@ -120,46 +120,46 @@
 |  |  └── types.ts
 |  ├── lib
 |  |  ├── README.md
-|  |  ├── dom.generated.d.ts
+|  |  ├── dom.generated.d.ts - 所有DOM相关的类型定义
 |  |  ├── dom.iterable.d.ts
 |  |  ├── dom.iterable.generated.d.ts
-|  |  ├── es2015.collection.d.ts
-|  |  ├── es2015.core.d.ts
-|  |  ├── es2015.d.ts
-|  |  ├── es2015.full.d.ts
-|  |  ├── es2015.generator.d.ts
-|  |  ├── es2015.iterable.d.ts
-|  |  ├── es2015.promise.d.ts
-|  |  ├── es2015.proxy.d.ts
-|  |  ├── es2015.reflect.d.ts
-|  |  ├── es2015.symbol.d.ts
-|  |  ├── es2015.symbol.wellknown.d.ts
-|  |  ├── es2016.array.include.d.ts
-|  |  ├── es2016.d.ts
-|  |  ├── es2016.full.d.ts
-|  |  ├── es2017.d.ts
+|  |  ├── es2015.collection.d.ts - Map/Set/WeakMap/WeakSet的类型定义
+|  |  ├── es2015.core.d.ts - es2015中关于核心类型的拓展
+|  |  ├── es2015.d.ts -  es2015的js入口
+|  |  ├── es2015.full.d.ts - es2015 js、dom、webworker集合入口
+|  |  ├── es2015.generator.d.ts - GeneratorFunctionConstructor的定义
+|  |  ├── es2015.iterable.d.ts - 可迭代的类型及其他类型兼容之
+|  |  ├── es2015.promise.d.ts - Promise类型定义
+|  |  ├── es2015.proxy.d.ts - Proxy类型定义
+|  |  ├── es2015.reflect.d.ts - Reflect命令空间定义
+|  |  ├── es2015.symbol.d.ts - 定义Symbol对象
+|  |  ├── es2015.symbol.wellknown.d.ts - 给所有其他类型兼容Symbol类型的key
+|  |  ├── es2016.array.include.d.ts - 给Array/Int8Array等增加includes方法
+|  |  ├── es2016.d.ts - es2016的js增加了Array.prototpye.include
+|  |  ├── es2016.full.d.ts - es2016的js和dom
+|  |  ├── es2017.d.ts - es2017的js入口
 |  |  ├── es2017.full.d.ts
-|  |  ├── es2017.intl.d.ts
-|  |  ├── es2017.object.d.ts
-|  |  ├── es2017.sharedmemory.d.ts
-|  |  ├── es2017.string.d.ts
+|  |  ├── es2017.intl.d.ts - Intl的时间处理DateTimeFormat
+|  |  ├── es2017.object.d.ts - Object.values/entries/getOwnPropertyDescriptors
+|  |  ├── es2017.sharedmemory.d.ts - Atomics对象
+|  |  ├── es2017.string.d.ts - String.padStart/padEnd
 |  |  ├── es2017.typedarrays.d.ts
-|  |  ├── es2018.asyncgenerator.d.ts
-|  |  ├── es2018.asynciterable.d.ts
+|  |  ├── es2018.asyncgenerator.d.ts - AsyncGenerator
+|  |  ├── es2018.asynciterable.d.ts - 异步可迭代对象AsyncIterator
 |  |  ├── es2018.d.ts
 |  |  ├── es2018.full.d.ts
 |  |  ├── es2018.intl.d.ts
-|  |  ├── es2018.promise.d.ts
-|  |  ├── es2018.regexp.d.ts
-|  |  ├── es2019.array.d.ts
+|  |  ├── es2018.promise.d.ts - Promise.finally
+|  |  ├── es2018.regexp.d.ts - RegExp.dotAll
+|  |  ├── es2019.array.d.ts - Array.flat/flatMap
 |  |  ├── es2019.d.ts
 |  |  ├── es2019.full.d.ts
-|  |  ├── es2019.object.d.ts
-|  |  ├── es2019.string.d.ts
-|  |  ├── es2019.symbol.d.ts
+|  |  ├── es2019.object.d.ts - Object.fromEntries
+|  |  ├── es2019.string.d.ts - String.trimEnd/trimStart/trimLeft/trimRight
+|  |  ├── es2019.symbol.d.ts - Symbol.description
 |  |  ├── es2020.d.ts
 |  |  ├── es2020.full.d.ts
-|  |  ├── es2020.string.d.ts
+|  |  ├── es2020.string.d.ts - String.matchAll
 |  |  ├── es2020.symbol.wellknown.d.ts
 |  |  ├── es5.d.ts - es5的声明文件，js规范的基本声明
 |  |  ├── es5.full.d.ts
@@ -486,6 +486,9 @@ ignored: directory (17)
 ### src/lib/es5.d.ts
 
 标准javascript库的api的声明文件，阅读此文件可以熟悉js的api和ts的api。
+
+定义了各类js基本类型的类型以及工具类型。
+
 
 # TypeScript
 

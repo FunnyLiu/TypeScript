@@ -24,5 +24,5 @@ interface SymbolConstructor {
      */
     keyFor(sym: symbol): string | undefined;
 }
-
+// 定义Symbol对象
 declare var Symbol: SymbolConstructor;

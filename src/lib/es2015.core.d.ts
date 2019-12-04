@@ -1,3 +1,4 @@
+//给Array增加find/findIndex等es2015规范的方法
 interface Array<T> {
     /**
      * Returns the value of the first element in the array where predicate is true, and undefined
@@ -8,8 +9,20 @@ interface Array<T> {
      * @param thisArg If provided, it will be used as the this value for each invocation of
      * predicate. If it is not provided, undefined is used instead.
      */
-    find<S extends T>(predicate: (this: void, value: T, index: number, obj: T[]) => value is S, thisArg?: any): S | undefined;
-    find(predicate: (value: T, index: number, obj: T[]) => unknown, thisArg?: any): T | undefined;
+    find<S extends T>(
+        predicate: (
+            this: void,
+            value: T,
+            index: number,
+            obj: T[]
+        ) => value is S,
+        thisArg?: any
+    ): S | undefined;
+    //传入回调函数
+    find(
+        predicate: (value: T, index: number, obj: T[]) => unknown,
+        thisArg?: any
+    ): T | undefined;
 
     /**
      * Returns the index of the first element in the array where predicate is true, and -1
@@ -20,7 +33,10 @@ interface Array<T> {
      * @param thisArg If provided, it will be used as the this value for each invocation of
      * predicate. If it is not provided, undefined is used instead.
      */
-    findIndex(predicate: (value: T, index: number, obj: T[]) => unknown, thisArg?: any): number;
+    findIndex(
+        predicate: (value: T, index: number, obj: T[]) => unknown,
+        thisArg?: any
+    ): number;
 
     /**
      * Returns the this object after filling the section identified by start and end with value
@@ -57,7 +73,11 @@ interface ArrayConstructor {
      * @param mapfn A mapping function to call on every element of the array.
      * @param thisArg Value of 'this' used to invoke the mapfn.
      */
-    from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: number) => U, thisArg?: any): U[];
+    from<T, U>(
+        arrayLike: ArrayLike<T>,
+        mapfn: (v: T, k: number) => U,
+        thisArg?: any
+    ): U[];
 
     /**
      * Returns a new array from a set of elements.
@@ -255,7 +275,7 @@ interface NumberConstructor {
      */
     parseInt(string: string, radix?: number): number;
 }
-
+// 引入Object.assign等
 interface ObjectConstructor {
     /**
      * Copy the values of all of the enumerable own properties from one or more source objects to a
@@ -282,7 +302,12 @@ interface ObjectConstructor {
      * @param source2 The second source object from which to copy properties.
      * @param source3 The third source object from which to copy properties.
      */
-    assign<T, U, V, W>(target: T, source1: U, source2: V, source3: W): T & U & V & W;
+    assign<T, U, V, W>(
+        target: T,
+        source1: U,
+        source2: V,
+        source3: W
+    ): T & U & V & W;
 
     /**
      * Copy the values of all of the enumerable own properties from one or more source objects to a
@@ -302,6 +327,8 @@ interface ObjectConstructor {
      * Returns the names of the enumerable string properties and methods of an object.
      * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
      */
+    // object类型只能引用类型，即非bool, number, string, symbol
+    // 而{}则可以。
     keys(o: {}): string[];
 
     /**
@@ -329,8 +356,19 @@ interface ReadonlyArray<T> {
      * @param thisArg If provided, it will be used as the this value for each invocation of
      * predicate. If it is not provided, undefined is used instead.
      */
-    find<S extends T>(predicate: (this: void, value: T, index: number, obj: readonly T[]) => value is S, thisArg?: any): S | undefined;
-    find(predicate: (value: T, index: number, obj: readonly T[]) => unknown, thisArg?: any): T | undefined;
+    find<S extends T>(
+        predicate: (
+            this: void,
+            value: T,
+            index: number,
+            obj: readonly T[]
+        ) => value is S,
+        thisArg?: any
+    ): S | undefined;
+    find(
+        predicate: (value: T, index: number, obj: readonly T[]) => unknown,
+        thisArg?: any
+    ): T | undefined;
 
     /**
      * Returns the index of the first element in the array where predicate is true, and -1
@@ -341,7 +379,10 @@ interface ReadonlyArray<T> {
      * @param thisArg If provided, it will be used as the this value for each invocation of
      * predicate. If it is not provided, undefined is used instead.
      */
-    findIndex(predicate: (value: T, index: number, obj: readonly T[]) => unknown, thisArg?: any): number;
+    findIndex(
+        predicate: (value: T, index: number, obj: readonly T[]) => unknown,
+        thisArg?: any
+    ): number;
 }
 
 interface RegExp {
@@ -437,6 +478,7 @@ interface String {
      * Returns an <a> HTML anchor element and sets the name attribute to the text value
      * @param name
      */
+    // 已被标准废弃
     anchor(name: string): string;
 
     /** Returns a <big> HTML element */
